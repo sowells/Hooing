@@ -1,2 +1,2 @@
 # Hooing
-Hoping, Hooling, and HooManHoo
+Hooing, Hooling, and HooManHoo
