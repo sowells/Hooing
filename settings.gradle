@@ -1,0 +1,3 @@
+rootProject.name = 'hooing'
+include 'frontend'
+include 'backend'
