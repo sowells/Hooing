@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import bar, {foo} from './Module.js';
 
 function Example() {
   const [count, setCount] = useState(0)
@@ -26,7 +27,7 @@ class App extends Component {
             Edit <code>src/App.js</code> and save to reload.!!!
           </p>
           <p>
-            그냥
+            그냥 + {bar()} + {foo()}
           </p>
           <a
             className="App-link"
