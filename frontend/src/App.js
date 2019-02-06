@@ -1,47 +1,58 @@
-import React, { Component } from 'react';
-import {useState } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import bar, {foo} from './Module.js';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { withStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
-function Example() {
-  const [count, setCount] = useState(0)
+const styles = {
+  card: {
+    maxWidth: 345,
+  },
+  media: {
+    height: 140,
+  },
+};
+
+function MediaCard(props) {
+  const { classes } = props;
   return (
-      <div>
-            <p>You click {count} times</p>
-            <button onClick={() => setCount(count + 1)}>
-              Click me
-            </button>
-      </div>
+    <Card className={classes.card}>
+      <CardMedia
+        className={classes.media}
+        image="/static/images/hooing.png"
+        title="Contemplative Reptile"
+      />
+      <CardContent>
+        <Typography gutterBottom variant="h5" component="h2">
+          쾌변후잉 (Quabyeon Hooing)
+          </Typography>
+        <Typography component="p">
+          Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
+          across all continents except Antarctica
+          </Typography>
+      </CardContent>
+      <CardActionArea>
 
+      </CardActionArea>
+      <CardActions>
+        <Button size="small" color="primary">
+          아주좋음 4.9/5
+        </Button>
+        <Button size="small" color="primary">
+          공유
+        </Button>
+      </CardActions>
+    </Card>
   );
 }
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.!!!
-          </p>
-          <p>
-            그냥 + {bar()} + {foo()}
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-        Example()
-      </div>
-    );
-  }
-}
+MediaCard.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
 
-export default App;
+export default withStyles(styles)(MediaCard);
