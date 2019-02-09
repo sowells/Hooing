@@ -9,6 +9,9 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Bar from './components/Bar'
+import Men from './components/Men'
+
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 const styles = {
   card: {
@@ -63,8 +66,8 @@ let StyledCard = withStyles(styles)(MediaCard)
 function Main() {
   return (
     <div>
-        <Bar/>
-        <StyledCard/>
+      <Route exact path="/" component={Bar}/>
+      <Route path="/men" component={Men}/>
     </div>
   )
 }
