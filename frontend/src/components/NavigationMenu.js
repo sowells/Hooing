@@ -26,7 +26,9 @@ function NavigationMenu(props) {
   return (
       <List component="nav" className={classes.root}>
         <ListItem button>
+            <Link to="/men">
             <ListItemText primary="Men" />
+            </Link>
         </ListItem>
         <Divider />
         <ListItem button divider>
