@@ -8,6 +8,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Bar from './components/Bar'
 
 const styles = {
   card: {
@@ -17,6 +18,8 @@ const styles = {
     height: 140,
   },
 };
+
+
 
 function MediaCard(props) {
   const { classes } = props;
@@ -54,5 +57,17 @@ function MediaCard(props) {
 MediaCard.propTypes = {
   classes: PropTypes.object.isRequired,
 };
+let StyledCard = withStyles(styles)(MediaCard)
 
-export default withStyles(styles)(MediaCard);
+
+function Main() {
+  return (
+    <div>
+        <Bar/>
+        <StyledCard/>
+    </div>
+  )
+}
+//export default Bar
+export default Main
+//export default withStyles(styles)(MediaCard);
