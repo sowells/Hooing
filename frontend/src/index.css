@@ -2,7 +2,8 @@
  * Props to Eric Meyer (meyerweb.com) for his CSS reset file. We're using an adapted version here	that cuts out some of the reset HTML elements we will never need here (i.e., dfn, samp, etc).
  * ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- */
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans:400,400i,800');
-html,
+html {
+}
 body {
   margin: 0;
   padding: 0;
@@ -224,7 +225,7 @@ body {
   font-style: 400;
   color: #333;
   font-size: 16px;
-  background-color: #26c6da;
+  background-color: #f8f8f8;
 }
 h1,
 h2,

@@ -5,7 +5,8 @@ import Bar from './components/Bar'
 import * as serviceWorker from './serviceWorker';
 import Men from './components/Men'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Welcome from './pages/welcome.js'
+import Welcome from './pages/welcome'
+import Detail from './pages/detail'
 
 function Header() {
     return (
@@ -27,8 +28,8 @@ function Main() {
     )
 }
 
-ReactDOM.render(<Main/>, document.getElementById('root'));
-
+// ReactDOM.render(<Main/>, document.getElementById('root'));
+ReactDOM.render(<Detail />, document.getElementById('root'));
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
