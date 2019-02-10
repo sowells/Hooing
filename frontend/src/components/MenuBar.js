@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -9,6 +9,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/core/Menu";
 import NavigationMenu from "./NavigationMenu";
 import Modal from "@material-ui/core/Modal";
+import menuReducer,{menuDispatch,MENU_ACTION_TYPE} from '../businessLogic/menuReducer'
 
 const getModalStyles = () => {
   let top = 10;
@@ -22,30 +23,35 @@ const getModalStyles = () => {
 
 const MenuBarStyles = {
   root: {
-      flexGrow: 1
-    },
-    grow: {
-      flexGrow: 1
-    },
-    menuButton: {
-      marginLeft: -12,
-      marginRight: 20
-    }
+    flexGrow: 1
+  },
+  grow: {
+    flexGrow: 1
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20
+  }
 };
 
 function MenuBar(props) {
-  const [menuToggleOn, setMenuToggleOn] = useState(false);
-  const { classes } = props
+  const { classes } = props;
+  let [isOpen, dispatch] = useReducer(menuReducer, false)
+  function open() {
+    dispatch({
+      type: MENU_ACTION_TYPE.OPEN_MENU
+    })
+  }
   return (
     <div className={classes.root}>
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
-        open={menuToggleOn}
-        onClick={()=>setMenuToggleOn(false)}
-        onClose={()=>setMenuToggleOn(false)}
+        open={isOpen}
       >
+      <menuDispatch.Provider value={dispatch}>
         <NavigationMenu />
+      </menuDispatch.Provider>
       </Modal>
       <AppBar position="static">
         <ToolBar>
@@ -53,7 +59,7 @@ function MenuBar(props) {
             className={classes.menuButton}
             color="inherit"
             aria-label="Menu"
-            onClick={()=>setMenuToggleOn(true)}
+            onClick={() => open()}
           >
             <MenuIcon />
           </IconButton>
@@ -65,6 +71,7 @@ function MenuBar(props) {
           </Button>
         </ToolBar>
       </AppBar>
+      <h1>value is {isOpen.toString()}</h1>
     </div>
   );
 }
@@ -72,4 +79,3 @@ MenuBar.propTypes = {
   classes: PropTypes.object.isRequired
 };
 export default withStyles(MenuBarStyles)(MenuBar);
-
