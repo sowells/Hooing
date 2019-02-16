@@ -1,23 +1,14 @@
-import React, { useState, useReducer, useContext } from "react";
+import React, { useState, useContext } from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import {
-  AccessAlarm,
-  Drafts,
-  Menu,
   ExpandLess,
   ExpandMore
 } from "@material-ui/icons";
-import Divider from "@material-ui/core/Divider";
-import PropTypes from "prop-types";
-import WrappedIcon from "./WrappedIcon";
-import IconButton from "@material-ui/core/IconButton";
-import Icon from "@material-ui/core/Icon";
 import { withStyles, Collapse } from "@material-ui/core";
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import menuReducer,{menuDispatch, MENU_ACTION_TYPE} from '../businessLogic/menuReducer';
+import { Link } from "react-router-dom";
+import {menuDispatch, MENU_ACTION_TYPE} from '../businessLogic/menuReducer';
 
 const styles = theme => ({
   root: {
@@ -84,7 +75,7 @@ function MenuCategory(props) {
 MenuCategory =  withStyles(styles)(MenuCategory);
 
 function NavigationMenu(props) {
-  const { categories, classes } = props;
+  const { classes } = props;
   return (
     <List component="nav" className={classes.root}>
       <MenuCategory categories={[menuCategory]}  />

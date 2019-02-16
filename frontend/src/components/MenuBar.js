@@ -6,7 +6,7 @@ import ToolBar from "@material-ui/core/Toolbar";
 import TypoGraphy from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/core/Menu";
+import MenuIcon from "@material-ui/icons/Menu";
 import NavigationMenu from "./NavigationMenu";
 import Modal from "@material-ui/core/Modal";
 import menuReducer,{menuDispatch,MENU_ACTION_TYPE} from '../businessLogic/menuReducer'
@@ -42,12 +42,18 @@ function MenuBar(props) {
       type: MENU_ACTION_TYPE.OPEN_MENU
     })
   }
+  function close() {
+    dispatch({
+      type: MENU_ACTION_TYPE.CLOSE_MENU
+    })
+  }
   return (
     <div className={classes.root}>
       <Modal
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
         open={isOpen}
+        onClose={()=>close()}
       >
       <menuDispatch.Provider value={dispatch}>
         <NavigationMenu />
@@ -71,7 +77,6 @@ function MenuBar(props) {
           </Button>
         </ToolBar>
       </AppBar>
-      <h1>value is {isOpen.toString()}</h1>
     </div>
   );
 }
