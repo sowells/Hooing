@@ -3,20 +3,32 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import MenuBar from "./components/MenuBar";
 import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Detail from "./pages/detail";
-import ProductList from "./pages/productList"
+import ShirtsCollection from "./pages/ShirtsCollection";
+import ProductList from "./pages/ProductList";
+import Product from "./pages/Product";
 
 function Main() {
   return (
     <div>
-      {/* <BrowserRouter>
-        <div>
-          <Route path="/" component={MenuBar} />
-          <Route path="/men" component={ProductList} />
-        </div>
-      </BrowserRouter> */}
-      <Detail />
+      {
+        <BrowserRouter>
+          <div>
+            <Route path="/" component={MenuBar} />
+            <Switch>
+              <Route
+                path="/collection/:category/products/:product"
+                component={Product}
+              />
+              <Route path="/collection/:category" component={ProductList} />
+            </Switch>
+            <Route path="/detailTest" component={Detail} />
+            <Route path="/kimHooing" component={ShirtsCollection} />
+          </div>
+        </BrowserRouter>
+      }
+      {/*<Detail />*/}
     </div>
   );
 }

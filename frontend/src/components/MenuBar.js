@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useReducer } from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import AppBar from "@material-ui/core/AppBar";
@@ -10,16 +10,9 @@ import MenuIcon from "@material-ui/icons/Menu";
 import NavigationMenu from "./NavigationMenu";
 import Modal from "@material-ui/core/Modal";
 import menuReducer,{menuDispatch,MENU_ACTION_TYPE} from '../businessLogic/menuReducer'
+import {menuCategories} from '../testData/Menu'
 
-const getModalStyles = () => {
-  let top = 10;
-  let left = -12;
-  return {
-    top: `${top}px`,
-    left: `${left}px`,
-    transform: `translate(-${top}px, -${left}px)`
-  };
-};
+
 
 const MenuBarStyles = {
   root: {
@@ -37,16 +30,9 @@ const MenuBarStyles = {
 function MenuBar(props) {
   const { classes } = props;
   let [isOpen, dispatch] = useReducer(menuReducer, false)
-  function open() {
-    dispatch({
-      type: MENU_ACTION_TYPE.OPEN_MENU
-    })
-  }
-  function close() {
-    dispatch({
-      type: MENU_ACTION_TYPE.CLOSE_MENU
-    })
-  }
+  const open = ()=>dispatch({type: MENU_ACTION_TYPE.OPEN_MENU  })
+  const close = ()=>dispatch({type: MENU_ACTION_TYPE.CLOSE_MENU  })
+    
   return (
     <div className={classes.root}>
       <Modal
@@ -56,7 +42,7 @@ function MenuBar(props) {
         onClose={()=>close()}
       >
       <menuDispatch.Provider value={dispatch}>
-        <NavigationMenu />
+        <NavigationMenu menuCategories={menuCategories} />
       </menuDispatch.Provider>
       </Modal>
       <AppBar position="static">

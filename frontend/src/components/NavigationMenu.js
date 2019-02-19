@@ -2,18 +2,16 @@ import React, { useState, useContext } from "react";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import {
-  ExpandLess,
-  ExpandMore
-} from "@material-ui/icons";
+import { ExpandLess, ExpandMore } from "@material-ui/icons";
 import { withStyles, Collapse } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import {menuDispatch, MENU_ACTION_TYPE} from '../businessLogic/menuReducer';
+import Paper from '@material-ui/core/Paper'
+import { menuDispatch, MENU_ACTION_TYPE } from "../businessLogic/menuReducer";
 
 const styles = theme => ({
   root: {
     width: "100%",
-    maxWidth: "360px",
+    maxWidth: "500px",
     backgroundColor: theme.palette.background.paper
   },
   nested: {
@@ -21,64 +19,55 @@ const styles = theme => ({
   }
 });
 
-const menItem = {
-  name: "HIGH WAIST",
-  url: "/men"
-};
-const hooingItem = {
-  name: "후잉 후잉",
-  url: "/men"
-}
-
-const menuCategory = {
-  name: "귀욤후링",
-  items: [menItem, hooingItem]
-};
-
-function MenuItem(props){
+function MenuItem(props) {
   const { items, classes } = props;
-  const dispatch = useContext(menuDispatch)
+  const dispatch = useContext(menuDispatch);
   function close() {
-    dispatch({type:MENU_ACTION_TYPE.CLOSE_MENU})
+    dispatch({ type: MENU_ACTION_TYPE.CLOSE_MENU });
   }
   return items.map(item => {
     return (
-      <ListItem button divider onClick={()=>close()} className={classes.nested}>
-        <Link to={item.url}>
-          <ListItemText primary={item.name} />
+      <ListItem
+        button
+        divider
+        key={item.name}
+        onClick={() => close()}
+        className={classes.nested}
+      >
+        <Link to={"/collection" + item.url}>
+          <ListItemText  primary={item.name} />
         </Link>
       </ListItem>
     );
   });
-};
-MenuItem =  withStyles(styles)(MenuItem);
+}
+MenuItem = withStyles(styles)(MenuItem);
 
 function MenuCategory(props) {
-  const { categories} = props;
+  const { category } = props;
   const [open, setOpen] = useState(false);
-  return categories.map(category => {
-    return (
-      <div>
-        <ListItem button onClick={() => setOpen(!open)}>
-          <ListItemText primary={category.name} />
-          {open ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={open} timeout="auto" unmountOnExit>
-          <List component="div" disablePadding>
-            <MenuItem items={category.items} />
-          </List> 
-        </Collapse>
-      </div>
-    );
-  });
+  return (
+    <div>
+      <ListItem button onClick={() => setOpen(!open)}>
+        <ListItemText primary={category.name} />
+        {open ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          <MenuItem items={category.items} />
+        </List>
+      </Collapse>
+    </div>
+  );
 }
-MenuCategory =  withStyles(styles)(MenuCategory);
+MenuCategory = withStyles(styles)(MenuCategory);
 
 function NavigationMenu(props) {
-  const { classes } = props;
+  const { classes, menuCategories } = props;
   return (
     <List component="nav" className={classes.root}>
-      <MenuCategory categories={[menuCategory]}  />
+      <Paper classes={{color:'red'}}>MENU BAR</Paper>
+      {menuCategories.map(category => <MenuCategory key={category.name} category = {category}/>)}
     </List>
   );
 }

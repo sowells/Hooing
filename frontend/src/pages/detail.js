@@ -12,6 +12,7 @@ import { Paper, Tabs, Tab, Table, TableHead, TableCell, TableBody, TableRow } fr
 import './detail.css';
 import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
+import QnA from './../components/QnA';
 
 const styles = theme => ({
     button: {
@@ -32,6 +33,10 @@ const styles = theme => ({
         margin: `${theme.spacing.unit}px auto`,
         padding: theme.spacing.unit * 2,
     },
+    paperChild: {
+        marginLeft: `${theme.spacing.unit*2}px`,
+        paddingTop: theme.spacing.unit * 2,
+    }
 });
 
 const productMainImageFrameStyles = {
@@ -129,28 +134,6 @@ const Review = (props) => {
     )
 }
 
-const QnA = (props) => {
-    const { classes, qnas } = props;
-    return (
-        <Paper className={classes.root}>
-            <Table className={classes.table}>
-                <TableBody>
-                {qnas.map(row => (
-                    <TableRow key={row.id}>
-                    <TableCell component="th" scope="row">
-                    <Typography variant="caption">{row.author} {row.date}</Typography>
-                        {/* {row.status = 'C' && } */}
-                        <Typography variant="body1">{row.content}</Typography>
-                        
-                    </TableCell>
-                    </TableRow>
-                ))}
-                </TableBody>
-            </Table>
-        </Paper>
-    )
-}
-
 const printRate = (rate) => {
     let result = '';
     for(let i = 0; i < rate; i++) {
@@ -236,10 +219,31 @@ class DetailPage extends React.Component {
                 id:'1',
                 author:'sowells',
                 date:'18.02.01',
-                status:'완료',
-                content:'귀여운가요?'
+                wasAnswered:'Y',
+                content:'귀여운가요?',
+                answer: {
+                    id:'1',
+                    author:'master',
+                    date:'18.02.01',
+                    content:'입술이 통통하고 볼이 만두같고, 코는 두툼하고 잘때는 낑낑거리고 얼마나 귀여운지 모릅니다 고객님',
+                    questionId:'1',
+                }
+            },
+            {
+                id:'2',
+                author:'kxjooho',
+                date:'18.02.02',
+                wasAnswered:'Y',
+                content:'몇키로인가요?',
+                answer: {
+                    id:'2',
+                    author:'master',
+                    date:'18.02.02',
+                    content:'67kg입니다.',
+                    questionId:'2',
+                }
             }
-        ]
+        ],
     };
 
     state = {
@@ -278,7 +282,7 @@ class DetailPage extends React.Component {
                 </Tabs>
                 {tabIndex === 0 && <ProductDetail description={this.product.description} />}
                 {tabIndex === 1 && <Review reviews={this.product.reviews} classes={classes}/>}
-                {tabIndex === 2 && <QnA qnas={this.product.questions} classes={classes}/>}
+                {tabIndex === 2 && <QnA questions={this.product.questions} classes={classes}/>}
             </Paper>
         )
     }
