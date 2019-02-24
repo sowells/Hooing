@@ -8,6 +8,7 @@ import Detail from "./pages/detail";
 import ShirtsCollection from "./pages/ShirtsCollection";
 import ProductList from "./pages/ProductList";
 import Product from "./pages/Product";
+import Login from "./pages/Login";
 
 function Main() {
   return (
@@ -15,7 +16,10 @@ function Main() {
       {
         <BrowserRouter>
           <div>
+          <Switch>
+            <Route path="/login" component={Login}/>
             <Route path="/" component={MenuBar} />
+            </Switch>
             <Switch>
               <Route
                 path="/collection/:category/products/:product"
