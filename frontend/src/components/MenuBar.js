@@ -30,10 +30,33 @@ const MenuBarStyles = {
 };
 
 function MenuBar(props) {
+
   const { classes } = props;
   let [isOpen, dispatch] = useReducer(menuReducer, false);
   const open = () => dispatch({ type: MENU_ACTION_TYPE.OPEN_MENU });
   const close = () => dispatch({ type: MENU_ACTION_TYPE.CLOSE_MENU });
+  const logOff = () =>  {
+    localStorage.removeItem("login") 
+    window.FB.logout( (r)=> {
+        console.log(r)
+    })
+  }
+
+  const auth = () => {
+    if(localStorage.getItem("login")) {
+      return (
+            <Button component={Link} onClick={()=>logOff()} to={`/logoff`} color="inherit">            
+              {localStorage.getItem("login")} logOff              
+            </Button> 
+      )
+    } else {
+      return (
+        <Button component={Link} to={`/login`} color="inherit">            
+          Login              
+        </Button> 
+      )   
+    }
+  }
 
   return (
     <div className={classes.root}>
@@ -60,9 +83,7 @@ function MenuBar(props) {
           <TypoGraphy variant="h6" color="inherit" className={classes.grow}>
             News
           </TypoGraphy>          
-            <Button component={Link} to={`/login`} color="inherit">            
-              Login              
-            </Button>          
+            {auth()}       
         </ToolBar>
       </AppBar>
     </div>
