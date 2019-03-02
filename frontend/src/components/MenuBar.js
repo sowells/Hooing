@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react';
+import React, { useReducer, useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -30,33 +30,57 @@ const MenuBarStyles = {
 };
 
 function MenuBar(props) {
-
   const { classes } = props;
   let [isOpen, dispatch] = useReducer(menuReducer, false);
+  const [isLogin, setLogin] = useState(false);
+
+  useEffect(() => {    
+    console.log("Effect.")
+    /*
+    window.FB.getLoginStatus(resp => {
+      const { status } = resp;
+      switch(status) {
+          case 'connected':{
+            const {authresponse} = resp
+            setLogin(true)
+            break
+          }
+          default: {
+            setLogin(false)
+          }          
+      }
+    });
+    */
+  });
+
   const open = () => dispatch({ type: MENU_ACTION_TYPE.OPEN_MENU });
   const close = () => dispatch({ type: MENU_ACTION_TYPE.CLOSE_MENU });
-  const logOff = () =>  {
-    localStorage.removeItem("login") 
-    window.FB.logout( (r)=> {
-        console.log(r)
-    })
-  }
+  const logOff = () => {    
+    window.FB.logout(r => {
+      console.log(r);
+    });
+  };
 
   const auth = () => {
-    if(localStorage.getItem("login")) {
+    if (isLogin) {
       return (
-            <Button component={Link} onClick={()=>logOff()} to={`/logoff`} color="inherit">            
-              {localStorage.getItem("login")} logOff              
-            </Button> 
-      )
+        <Button
+          component={Link}
+          onClick={() => logOff()}
+          to={`/logoff`}
+          color="inherit"
+        >
+          {localStorage.getItem('login')} logOff
+        </Button>
+      );
     } else {
       return (
-        <Button component={Link} to={`/login`} color="inherit">            
-          Login              
-        </Button> 
-      )   
+        <Button component={Link} to={`/login`} color="inherit">
+          Login
+        </Button>
+      );
     }
-  }
+  };
 
   return (
     <div className={classes.root}>
@@ -82,8 +106,8 @@ function MenuBar(props) {
           </IconButton>
           <TypoGraphy variant="h6" color="inherit" className={classes.grow}>
             News
-          </TypoGraphy>          
-            {auth()}       
+          </TypoGraphy>
+          {auth()}
         </ToolBar>
       </AppBar>
     </div>

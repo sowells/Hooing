@@ -1,23 +1,23 @@
-import React from "react";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import { withStyles } from "@material-ui/core/styles";
-import Button from "@material-ui/core/Button";
-import { Divider, Avatar} from "@material-ui/core";
-import { deepPurple } from "@material-ui/core/colors";
+import React from 'react';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import { withStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import { Divider, Avatar } from '@material-ui/core';
+import { deepPurple } from '@material-ui/core/colors';
 import { Link } from 'react-router-dom';
 
 const basicStyle = {
-  margin: "2rem auto",
-  maxWidth: "400px",
-  color: "red"
+  margin: '2rem auto',
+  maxWidth: '400px',
+  color: 'red'
 };
 
 const themeStyles = theme => ({
   container: {
-    display: "flex",
-    flexWrap: "wrap",
-    textAlgin: "center"
+    display: 'flex',
+    flexWrap: 'wrap',
+    textAlgin: 'center'
   },
   textField: {
     marginLeft: theme.spacing.unit,
@@ -35,7 +35,7 @@ const themeStyles = theme => ({
     width: 400
   },
   facebookAvatar: {
-    margin: "1rem auto",
+    margin: '1rem auto',
     width: 50,
     height: 50,
     color: `#fff`,
@@ -46,38 +46,20 @@ const themeStyles = theme => ({
 function login(props) {
   const { classes } = props;
   const openFbLoginPopup = () => {
-    console.log("open popup")
-    window.FB.login(function(response) {
-      // handle the response
-      const {authResponse} = response
-      //localStorage.setItem("accessToken",authResponse.accessToken)
-      console.log(authResponse)
-      /*
-      window.FB.api(
-        '/me',
-        'GET',
-        {"fields":"id,name"},
-        function(response) {
-            // Insert your code here
-            localStorage.setItem("login",response.name)
-            console.log(response)
-            let r = response
-        }
-      );
-      */
-    })
-    return (
-      <script>{
-        `
-        console.log("FB LOGIN")
-        FB.login(function(response) {
-  // handle the response
-}, {scope: 'public_profile,email'}); `
-}
-      </script>
-    )
-
-  }
+    console.log('open popup');
+    window.FB.login(
+      function(response) {
+        // handle the response
+        const { authResponse } = response;
+        console.log(authResponse);
+      },
+      {
+        scope: 'email, name',
+        return_scopes: true,
+        enable_profile_selector: true
+      }
+    );
+  };
   return (
     <div style={basicStyle}>
       <Typography
@@ -107,15 +89,14 @@ function login(props) {
       </form>
       <Divider style={{ marginTop: `3rem`, color: `black` }} />
       <div style={{ display: `inline` }}>
-        <Button onClick={()=>openFbLoginPopup()}>
-        <Avatar className={classes.facebookAvatar} >페북</Avatar>
+        <Button onClick={() => openFbLoginPopup()}>
+          <Avatar className={classes.facebookAvatar}>페북</Avatar>
         </Button>
         <Avatar className={classes.facebookAvatar}>넵버</Avatar>
       </div>
     </div>
   );
 }
-
 
 export default withStyles(themeStyles)(login);
 

@@ -1,20 +1,51 @@
-import React, { Component } from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import MenuBar from "./components/MenuBar";
-import * as serviceWorker from "./serviceWorker";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Detail from "./pages/detail";
-import ShirtsCollection from "./pages/ShirtsCollection";
-import ProductList from "./pages/ProductList";
-import Product from "./pages/Product";
-import Login from "./pages/Login";
-import AuthSuccess from "./pages/AuthSuccess";
-import { Helmet } from "react-helmet";
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import MenuBar from './components/MenuBar';
+import * as serviceWorker from './serviceWorker';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import Detail from './pages/detail';
+import ShirtsCollection from './pages/ShirtsCollection';
+import ProductList from './pages/ProductList';
+import Product from './pages/Product';
+import Login from './pages/Login';
+import AuthSuccess from './pages/AuthSuccess';
+import { Helmet } from 'react-helmet';
 
 class App extends Component {
+  initFbSdk() {
+    window.fbAsyncInit = function() {
+      console.log('INIT FB Async');
+      window.FB.init({
+        appId: '772029506498492',
+        cookie: true,
+        xfbml: true,
+        status: true,
+        version: 'v3.2'
+      });
+      window.FB.AppEvents.logPageView();
+    };
+  }
+
+  loadFbSdk() {
+    (function(d, s, id) {
+      var js,
+        fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk.js';
+      fjs.parentNode.insertBefore(js, fjs);
+      console.log('Load FB SDK.');
+    })(document, 'script', 'facebook-jssdk');
+  }
+
   componentDidMount() {
-    console.log("App Did Mount")
+    console.log('App Did Mount');
+    this.loadFbSdk();
+    this.initFbSdk();
   }
 
   render() {
@@ -23,32 +54,7 @@ class App extends Component {
         {
           <BrowserRouter>
             <div>
-              <Helmet>
-                <script type="text/javascript">
-                  {`
-                    window.fbAsyncInit = function() {
-                      console.log("INIT FB Async")
-                        FB.init({
-                        appId      : '772029506498492',
-                        cookie     : true,
-                        xfbml      : true,
-                        status     : true,
-                        version    : 'v3.2'
-                        });
-                        FB.AppEvents.logPageView();   
-                    };
-                    console.log("INIT FB METHOD")
-                    (function(d, s, id){
-                           console.log("Add FB Node")
-                            var js, fjs = d.getElementsByTagName(s)[0];
-                            if (d.getElementById(id)) {return;}
-                            js = d.createElement(s); js.id = id;
-                            js.src = "https://connect.facebook.net/en_US/sdk.js";
-                            fjs.parentNode.insertBefore(js, fjs);
-                        }(document, 'script', 'facebook-jssdk'))
-                `}
-                </script>
-              </Helmet>
+              
               <Switch>
                 <Route path="/success" component={AuthSuccess} />
                 <Route path="/login" component={Login} />
