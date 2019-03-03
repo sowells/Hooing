@@ -6,6 +6,7 @@
         </encoder>
     </appender>
     <logger name="org.hibernate.sql" level="ALL"/>
+    <logger name="org.springframework.web" level="ALL"/>
     <root level="debug">
         <appender-ref ref="STDOUT"/>
     </root>

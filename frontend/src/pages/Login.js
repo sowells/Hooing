@@ -89,10 +89,12 @@ function login(props) {
       </form>
       <Divider style={{ marginTop: `3rem`, color: `black` }} />
       <div style={{ display: `inline` }}>
-        <Button onClick={() => openFbLoginPopup()}>
+        <Button onClick={() => {window.location.href="https://www.facebook.com/v3.2/dialog/oauth?client_id=772029506498492&redirect_uri=https://localhost:8080/facebook  &state=`{st=state123abc,ds=123456789}`"}}>
           <Avatar className={classes.facebookAvatar}>페북</Avatar>
         </Button>
+        <Button onClick={()=>openFbLoginPopup()}>
         <Avatar className={classes.facebookAvatar}>넵버</Avatar>
+        </Button>
       </div>
     </div>
   );

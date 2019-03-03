@@ -27,10 +27,3 @@ fun main(args : Array<String>) {
     }
 }
 
-fun <T:Any> T.logger(): Logger = LoggerFactory.getLogger(getClassForLogging(javaClass))
-inline fun <T : Any> getClassForLogging(javaClass:Class<T>): Class<*> {
-    return javaClass.enclosingClass?.takeIf {
-        it.kotlin.companionObject?.java == javaClass
-    } ?: javaClass
-
-}
