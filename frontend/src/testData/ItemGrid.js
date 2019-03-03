@@ -1,5 +1,5 @@
 import React from "react";
-import Detail from "../pages/ProductDetail";
+import Detail from "../components/product/ProductDetail";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";

@@ -3,11 +3,11 @@ import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { Paper, Tabs, Tab, Table, TableHead, TableCell, TableBody, TableRow } from '@material-ui/core';
 import "react-image-gallery/styles/css/image-gallery.css";
-import QnA from '../components/QnA';
-import ProductInfo from '../components/product/ProductInfo';
-import ProductImage from '../components/product/ProductImage';
-import Review from './../components/product/Review';
-import ProductRate from './../components/product/ProductRate';
+import QnA from '../QnA';
+import ProductInfo from './ProductInfo';
+import ProductImage from './ProductImage';
+import Review from './Review';
+import ProductRate from './ProductRate';
 
 const styles = theme => ({
     button: {

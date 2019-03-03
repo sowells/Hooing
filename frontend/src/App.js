@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import MenuBar from './components/MenuBar';
-import * as serviceWorker from './serviceWorker';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Detail from './pages/detail';
-import ShirtsCollection from './pages/ShirtsCollection';
-import ProductList from './pages/ProductList';
-import Product from './pages/Product';
-import Login from './pages/Login';
-import AuthSuccess from './pages/AuthSuccess';
-import { Helmet } from 'react-helmet';
+import React, { Component } from "react";
+import "./index.css";
+import MenuBar from "./components/MenuBar";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Detail from "./components/product/ProductDetail";
+import ShirtsCollection from "./pages/ShirtsCollection";
+import ProductList from "./components/product/ProductList";
+import Product from "./components/product/Product";
+import Login from "./pages/Login";
+import AuthSuccess from "./pages/AuthSuccess";
 
 class App extends Component {
   initFbSdk() {

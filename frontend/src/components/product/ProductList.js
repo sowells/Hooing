@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
-import { MyPaper } from "../testData/ItemGrid";
-import ItemGrid from "../components/ItemGrid";
+import { MyPaper } from "../../testData/ItemGrid"
+import ItemGrid from "../ItemGrid";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
