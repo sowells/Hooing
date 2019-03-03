@@ -19,8 +19,8 @@ function ItemGrid(props) {
   const { items } = props;
   const { classes } = props;
 
-  const itemComponent = items.map(item => (
-    <Grid item sm={6} xs={12} >
+  const itemComponent = items.map((item, index) => (
+    <Grid item key={index} sm={6} xs={12} >
         {item}
     </Grid>
   ));

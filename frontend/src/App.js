@@ -4,7 +4,7 @@ import "./index.css";
 import MenuBar from "./components/MenuBar";
 import * as serviceWorker from "./serviceWorker";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Detail from "./pages/detail";
+import Detail from "./pages/ProductDetail";
 import ShirtsCollection from "./pages/ShirtsCollection";
 import ProductList from "./pages/ProductList";
 import Product from "./pages/Product";
@@ -14,7 +14,7 @@ import { Helmet } from "react-helmet";
 
 class App extends Component {
   componentDidMount() {
-    console.log("App Did Mount")
+    console.log("App Did Mount");
   }
 
   render() {
@@ -27,7 +27,7 @@ class App extends Component {
                 <script type="text/javascript">
                   {`
                     window.fbAsyncInit = function() {
-                      console.log("INIT FB Async")
+                      console.log("INIT FB Async");
                         FB.init({
                         appId      : '772029506498492',
                         cookie     : true,
@@ -37,9 +37,9 @@ class App extends Component {
                         });
                         FB.AppEvents.logPageView();   
                     };
-                    console.log("INIT FB METHOD")
+                    console.log("INIT FB METHOD");
                     (function(d, s, id){
-                           console.log("Add FB Node")
+                           console.log("Add FB Node");
                             var js, fjs = d.getElementsByTagName(s)[0];
                             if (d.getElementById(id)) {return;}
                             js = d.createElement(s); js.id = id;

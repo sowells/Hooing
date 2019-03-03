@@ -38,7 +38,7 @@ function MenuBar(props) {
   const logOff = () =>  {
     localStorage.removeItem("login") 
     window.FB.logout( (r)=> {
-        console.log(r)
+        console.log(r);
     })
   }
 

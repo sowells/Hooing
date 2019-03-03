@@ -46,12 +46,12 @@ const themeStyles = theme => ({
 function login(props) {
   const { classes } = props;
   const openFbLoginPopup = () => {
-    console.log("open popup")
+    console.log("open popup");
     window.FB.login(function(response) {
       // handle the response
       const {authResponse} = response
       //localStorage.setItem("accessToken",authResponse.accessToken)
-      console.log(authResponse)
+      console.log(authResponse);
       /*
       window.FB.api(
         '/me',
@@ -69,7 +69,7 @@ function login(props) {
     return (
       <script>{
         `
-        console.log("FB LOGIN")
+        console.log("FB LOGIN");
         FB.login(function(response) {
   // handle the response
 }, {scope: 'public_profile,email'}); `
