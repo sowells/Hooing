@@ -2,35 +2,35 @@ package main
 
 import infra.domain.Customer
 import infra.repository.CustomerRepository
+import infra.repository.ProductRepository
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
 import org.springframework.boot.CommandLineRunner
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.boot.autoconfigure.domain.EntityScan
 import org.springframework.boot.runApplication
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories
-import service.CustomerService
+import service.ProductService
+import kotlin.reflect.full.companionObject
 
 @SpringBootApplication(scanBasePackages = ["config","infra.**","service","api"])
 @EntityScan("infra.**")
 @EnableJpaRepositories("infra.**")
-class App(val customerService: CustomerService,
-          val customerRepository: CustomerRepository ) : CommandLineRunner {
+class App(val productService: ProductService,
+          val productRepository: ProductRepository ) : CommandLineRunner {
     override fun run(vararg args: String?) {
-        val customer = Customer().apply {
-            name = "Juho"
-        }
-        customerRepository.save(customer)
-        customerService.findAllCustomers().forEach{
-            println(it)
-        }
-
-        println("Test Runner")
     }
-
 }
 
 fun main(args : Array<String>) {
     runApplication<App>(*args) {
-
-
     }
+}
+
+fun <T:Any> T.logger(): Logger = LoggerFactory.getLogger(getClassForLogging(javaClass))
+inline fun <T : Any> getClassForLogging(javaClass:Class<T>): Class<*> {
+    return javaClass.enclosingClass?.takeIf {
+        it.kotlin.companionObject?.java == javaClass
+    } ?: javaClass
+
 }
