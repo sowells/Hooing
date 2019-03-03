@@ -46,7 +46,6 @@ const themeStyles = theme => ({
 function login(props) {
   const { classes } = props;
   const openFbLoginPopup = () => {
-<<<<<<< HEAD
     console.log('open popup');
     window.FB.login(
       function(response) {
@@ -61,40 +60,6 @@ function login(props) {
       }
     );
   };
-=======
-    console.log("open popup");
-    window.FB.login(function(response) {
-      // handle the response
-      const {authResponse} = response
-      //localStorage.setItem("accessToken",authResponse.accessToken)
-      console.log(authResponse);
-      /*
-      window.FB.api(
-        '/me',
-        'GET',
-        {"fields":"id,name"},
-        function(response) {
-            // Insert your code here
-            localStorage.setItem("login",response.name)
-            console.log(response)
-            let r = response
-        }
-      );
-      */
-    })
-    return (
-      <script>{
-        `
-        console.log("FB LOGIN");
-        FB.login(function(response) {
-  // handle the response
-}, {scope: 'public_profile,email'}); `
-}
-      </script>
-    )
-
-  }
->>>>>>> aa30d105d67804ce4203b600105bc0799e06be9a
   return (
     <div style={basicStyle}>
       <Typography
