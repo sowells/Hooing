@@ -55,11 +55,20 @@ function MenuBar(props) {
 
   const open = () => dispatch({ type: MENU_ACTION_TYPE.OPEN_MENU });
   const close = () => dispatch({ type: MENU_ACTION_TYPE.CLOSE_MENU });
+<<<<<<< HEAD
   const logOff = () => {    
     window.FB.logout(r => {
       console.log(r);
     });
   };
+=======
+  const logOff = () =>  {
+    localStorage.removeItem("login") 
+    window.FB.logout( (r)=> {
+        console.log(r);
+    })
+  }
+>>>>>>> aa30d105d67804ce4203b600105bc0799e06be9a
 
   const auth = () => {
     if (isLogin) {

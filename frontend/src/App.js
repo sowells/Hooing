@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
@@ -11,6 +12,21 @@ import Product from './pages/Product';
 import Login from './pages/Login';
 import AuthSuccess from './pages/AuthSuccess';
 import { Helmet } from 'react-helmet';
+=======
+import React, { Component } from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import MenuBar from "./components/MenuBar";
+import * as serviceWorker from "./serviceWorker";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+import Detail from "./pages/ProductDetail";
+import ShirtsCollection from "./pages/ShirtsCollection";
+import ProductList from "./pages/ProductList";
+import Product from "./pages/Product";
+import Login from "./pages/Login";
+import AuthSuccess from "./pages/AuthSuccess";
+import { Helmet } from "react-helmet";
+>>>>>>> aa30d105d67804ce4203b600105bc0799e06be9a
 
 class App extends Component {
   initFbSdk() {
@@ -43,9 +59,13 @@ class App extends Component {
   }
 
   componentDidMount() {
+<<<<<<< HEAD
     console.log('App Did Mount');
     this.loadFbSdk();
     this.initFbSdk();
+=======
+    console.log("App Did Mount");
+>>>>>>> aa30d105d67804ce4203b600105bc0799e06be9a
   }
 
   render() {
@@ -54,7 +74,36 @@ class App extends Component {
         {
           <BrowserRouter>
             <div>
+<<<<<<< HEAD
               
+=======
+              <Helmet>
+                <script type="text/javascript">
+                  {`
+                    window.fbAsyncInit = function() {
+                      console.log("INIT FB Async");
+                        FB.init({
+                        appId      : '772029506498492',
+                        cookie     : true,
+                        xfbml      : true,
+                        status     : true,
+                        version    : 'v3.2'
+                        });
+                        FB.AppEvents.logPageView();   
+                    };
+                    console.log("INIT FB METHOD");
+                    (function(d, s, id){
+                           console.log("Add FB Node");
+                            var js, fjs = d.getElementsByTagName(s)[0];
+                            if (d.getElementById(id)) {return;}
+                            js = d.createElement(s); js.id = id;
+                            js.src = "https://connect.facebook.net/en_US/sdk.js";
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'))
+                `}
+                </script>
+              </Helmet>
+>>>>>>> aa30d105d67804ce4203b600105bc0799e06be9a
               <Switch>
                 <Route path="/success" component={AuthSuccess} />
                 <Route path="/login" component={Login} />

@@ -1,11 +1,12 @@
 import React from 'react'
-import Detail from './detail'
+import Detail from './ProductDetail'
 
-export  default ({match})=> {
+export  default (props)=> {
+    const {match} = props
     return (
         <div>
             <h2>Product : {match.params.category}, {match.params.product} </h2>
-            <Detail/>
+            <Detail id={match.params.product}/>
         </div>
     )
 }

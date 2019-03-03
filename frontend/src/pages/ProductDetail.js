@@ -1,18 +1,13 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import { Paper, Tabs, Tab, Table, TableHead, TableCell, TableBody, TableRow } from '@material-ui/core';
-import './detail.css';
-import ImageGallery from 'react-image-gallery';
 import "react-image-gallery/styles/css/image-gallery.css";
-import QnA from './../components/QnA';
+import QnA from '../components/QnA';
+import ProductInfo from '../components/product/ProductInfo';
+import ProductImage from '../components/product/ProductImage';
+import Review from './../components/product/Review';
+import ProductRate from './../components/product/ProductRate';
 
 const styles = theme => ({
     button: {
@@ -22,21 +17,6 @@ const styles = theme => ({
     buttonDiv: {
         textAlign:'center'
     },
-    card: {
-        maxWidth: 345,
-    },
-    media: {
-        height: 140,
-    },
-    paper: {
-        maxWidth: 400,
-        margin: `${theme.spacing.unit}px auto`,
-        padding: theme.spacing.unit * 2,
-    },
-    paperChild: {
-        marginLeft: `${theme.spacing.unit*2}px`,
-        paddingTop: theme.spacing.unit * 2,
-    }
 });
 
 const productMainImageFrameStyles = {
@@ -65,52 +45,8 @@ const imageSize = {
     height:'400px',
 }
 
-const ProductImage = (props) => {
-    const [indexState, setIndex] = useState(0);
 
-    const nextImageHandler = () => {
-        console.log("next"+ indexState + props.images.length);
-        if(indexState < props.images.length - 1)
-            setIndex(indexState + 1);
-    }
-
-    return (
-        <ImageGallery items={props.images} showFullscreenButton={false} showPlayButton={false} showIndex={true} showThumbnails={false}/>
-        /*{ <div style={productMainImageFrameStyles} onClick={nextImageHandler}>
-            <img src={props.images[indexState].url} alt={props.images[indexState].title} title={props.images[indexState].title} key={props.images[indexState].id} style={productMainImageStyles}></img>
-        </div> }*/
-    );
-}
-
-const ProductInfo = (props) => {
-    return (
-        <div>
-            <Typography variant="h5" component="h3">
-                {props.name}
-            </Typography>
-            <Typography variant="h6">
-                {props.price}원
-            </Typography>                
-        </div>
-    );
-}
-
-const ProductRate = (props) => {
-    let comment;
-
-    if(props.rate > 4.5) comment = '최고 좋음';
-    else if(props.rate > 4) comment = '아주 좋음';
-    else if(props.rate > 3) comment = '좋음';
-
-
-    return (
-        <div>
-            {comment + ' ' + props.rate + ' / 5'}
-        </div>  
-    );
-}
-
-const ProductDetail = (props) => {
+const ProductDescription = (props) => {
     return (
         <div>
             {props.description}
@@ -118,30 +54,10 @@ const ProductDetail = (props) => {
     )
 }
 
-const Review = (props) => {
-    const { classes } = props;
-    return (
-        <div>
-            {
-                props.reviews.map((image) => 
-                    <Paper className={classes.paper}>
-                        <Typography variant="caption">{image.author} {printRate(image.rate)} 옵션:{image.option} {image.date}</Typography>
-                        <Typography variant="body1">{image.content}</Typography>
-                    </Paper>
-                )
-            }
-        </div>
-    )
-}
-
-const printRate = (rate) => {
-    let result = '';
-    for(let i = 0; i < rate; i++) {
-        result += '★';
-    }
-    return result;
-}
 class DetailPage extends React.Component {
+    constructor(props) {
+        super(props)
+    }
     product = {
         name: '쾌변후잉(Quabyeon Hooing)',
         price: '15000',
@@ -280,7 +196,7 @@ class DetailPage extends React.Component {
                     <Tab label="구매후기" />
                     <Tab label="Q&A" />
                 </Tabs>
-                {tabIndex === 0 && <ProductDetail description={this.product.description} />}
+                {tabIndex === 0 && <ProductDescription description={this.product.description} />}
                 {tabIndex === 1 && <Review reviews={this.product.reviews} classes={classes}/>}
                 {tabIndex === 2 && <QnA questions={this.product.questions} classes={classes}/>}
             </Paper>
@@ -288,5 +204,4 @@ class DetailPage extends React.Component {
     }
 }
 
-// export default withStyles(styles)(MediaCard);
 export default withStyles(styles)(DetailPage);

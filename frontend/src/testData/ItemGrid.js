@@ -1,9 +1,10 @@
 import React from "react";
-import Detail from "../pages/detail";
+import Detail from "../pages/ProductDetail";
 import { withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
-import Fab from "@material-ui/core/Fab";
+import ProductThumbnail from './../components/product/ProductThumbnail';
+import ProductInfo from './../components/product/ProductInfo';
 
 const styles = theme => ({
   paper: {
@@ -15,10 +16,12 @@ const styles = theme => ({
 });
 
 function MyPaper(props) {
-  const { classes, text } = props;
   return (
     <Button>
-      <Paper className={classes.paper}>{text}</Paper>
+      <Paper className={props.classes.paper}>
+        <ProductThumbnail url={props.thumbnailUrl} alt={props.alt}/>
+        <ProductInfo name={props.name} price={props.price}/>    
+      </Paper>
     </Button>
   );
 }
